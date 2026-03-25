@@ -1,4 +1,4 @@
-package com.app.product;
+package com.app.post.controller;
 
 import java.io.IOException;
 
@@ -8,22 +8,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.app.Action;
 import com.app.Result;
-import com.app.dao.ProductDAO;
-import com.app.exception.ProductNotFoundException;
+import com.app.dao.PostDAO;
+import com.app.exception.PostNotFoundException;
+import com.app.vo.PostVO;
 
-public class ProductUpdateController implements Action {
+public class PostUpdateController implements Action {
 
-		//강제성을 부여하기 위해서 Action 구현
 	@Override
 	public Result excute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		Result result = new Result();
-		ProductDAO productDAO = new ProductDAO();
+		PostDAO postDAO = new PostDAO();
 		
 		Long id = Long.parseLong(req.getParameter("id"));
-		req.setAttribute("product", productDAO.select(id).orElseThrow(ProductNotFoundException::new)); 
 		
-		result.setPath("/update.jsp");
+		PostVO post = postDAO.select(id).orElseThrow(() -> {
+			throw new PostNotFoundException("수정할 게시글이 없습니다.");
+		});
 		
+		req.setAttribute("post", post);
+		
+		result.setPath("update.jsp");
 		return result;
 	}
 

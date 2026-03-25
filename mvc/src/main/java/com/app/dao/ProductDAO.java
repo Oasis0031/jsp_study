@@ -13,7 +13,7 @@ public class ProductDAO {
 	
 	public ProductDAO() {
 		sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true);
-	}
+	};
 	
 	public void insert(ProductVO productVO) {
 		sqlSession.insert("product.insert", productVO);
@@ -26,5 +26,13 @@ public class ProductDAO {
 	
 	public Optional<ProductVO> select(Long id) {
 		return Optional.ofNullable(sqlSession.selectOne("product.select", id));
+	}
+	
+	public void update(ProductVO productVO) {
+		sqlSession.update("product.update", productVO);
+	}
+	
+	public void delete(Long id) {
+		sqlSession.delete("product.delete", id);
 	}
 }

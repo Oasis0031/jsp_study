@@ -1,7 +1,6 @@
-package com.app.product;
+package com.app.product.controller;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,24 +10,19 @@ import com.app.Action;
 import com.app.Result;
 import com.app.dao.ProductDAO;
 import com.app.exception.ProductNotFoundException;
-import com.app.vo.ProductVO;
 
-public class ProductReadController implements Action {
+public class ProductUpdateController implements Action {
 
+		//강제성을 부여하기 위해서 Action 구현
 	@Override
 	public Result excute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		Result result = new Result();
 		ProductDAO productDAO = new ProductDAO();
 		
 		Long id = Long.parseLong(req.getParameter("id"));
-		Optional<ProductVO> foundProduct = productDAO.select(id);
-
-		ProductVO product = foundProduct.orElseThrow(() -> {throw new ProductNotFoundException("상품을 찾을 수 없습니다.");});
-		req.setAttribute("product", product);
+		req.setAttribute("product", productDAO.select(id).orElseThrow(ProductNotFoundException::new)); 
 		
-		//어디로, 포워드
-		result.setPath("/read.jsp");
-		
+		result.setPath("/update.jsp");
 		
 		return result;
 	}

@@ -16,11 +16,22 @@
 	</select>
 
 	<select id="select" parameterType="Long" resultType="ProductVO">
-		SELECT ID, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK
+		SELECT ID,
+		PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_STOCK
 		FROM TBL_PRODUCT
 		WHERE ID = #{id}
 	</select>
 
+	<update id="update" parameterType="ProductVO">
+		UPDATE TBL_PRODUCT
+		SET PRODUCT_NAME = #{productName},
+		PRODUCT_PRICE = #{productPrice}, PRODUCT_STOCK = #{productStock}
+		WHERE ID = #{id}
+	</update>
 	
+	<delete id="delete" parameterType="Long">
+      DELETE FROM TBL_PRODUCT
+      WHERE ID = #{id}
+   </delete>
 
 </mapper>

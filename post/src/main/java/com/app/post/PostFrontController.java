@@ -1,4 +1,4 @@
-package com.app.product;
+package com.app.post;
 
 import java.io.IOException;
 
@@ -8,54 +8,52 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.app.Result;
-import com.app.product.controller.ProductDeleteOkController;
-import com.app.product.controller.ProductListController;
-import com.app.product.controller.ProductReadController;
-import com.app.product.controller.ProductUpdateController;
-import com.app.product.controller.ProductUpdateOkController;
-import com.app.product.controller.ProductWriteController;
-import com.app.product.controller.ProductWriteOkController;
+import com.app.post.controller.PostDeleteOkController;
+import com.app.post.controller.PostListController;
+import com.app.post.controller.PostReadController;
+import com.app.post.controller.PostUpdateController;
+import com.app.post.controller.PostUpdateOkController;
+import com.app.post.controller.PostWriteController;
+import com.app.post.controller.PostWriteOkController;
 
-//Servlet
-public class ProductFrontController extends HttpServlet {
-
+public class PostFrontController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html; charset=UTF-8;");
-		
+
 		String target = req.getRequestURI().split("\\.")[0].replace(req.getContextPath() + "/", "");
 		System.out.println(target);
 		Result result = null;
 
 		if (target.equals("write")) {
-			result = new ProductWriteController().excute(req, resp);
+			result = new PostWriteController().excute(req, resp);
 		} else if (target.equals("write-ok")) {
-			result = new ProductWriteOkController().excute(req, resp);
+			result = new PostWriteOkController().excute(req, resp);
 		} else if (target.equals("list")) {
-			result = new ProductListController().excute(req, resp);
+			result = new PostListController().excute(req, resp);
 		} else if (target.equals("read")) {
-			result = new ProductReadController().excute(req, resp);
+			result = new PostReadController().excute(req, resp);
 		} else if (target.equals("update")) {
-			result = new ProductUpdateController().excute(req, resp);
+			result = new PostUpdateController().excute(req, resp);
 		} else if (target.equals("update-ok")) {
-			result = new ProductUpdateOkController().excute(req, resp);
+			result = new PostUpdateOkController().excute(req, resp);
 		} else if (target.equals("delete-ok")) {
-			result = new ProductDeleteOkController().excute(req, resp);
+			result = new PostDeleteOkController().excute(req, resp);
 		} else {
-			//Not found 404
+			// not found 404
 		}
-		
-		if(result != null) {
-			if(result.isRedirect()) {
+
+		if (result != null) {
+			if (result.isRedirect()) {
 				resp.sendRedirect(result.getPath());
 			} else {
-				//포워드
+				// 포워드
 				req.getRequestDispatcher(result.getPath()).forward(req, resp);
 			}
+
 		}
-		
 	}
 
 	@Override
