@@ -1,0 +1,78 @@
+package com.app.vo;
+
+import java.util.Objects;
+
+public class OrderVO {
+	private Long id;
+	private Integer orderCount;
+	private Integer productId;
+	private Integer memberId;
+	
+	public OrderVO() {;}
+
+	public OrderVO(Long id, Integer orderCount, Integer productId, Integer memberId) {
+		super();
+		this.id = id;
+		this.orderCount = orderCount;
+		this.productId = productId;
+		this.memberId = memberId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getOrderCount() {
+		return orderCount;
+	}
+
+	public void setOrderCount(Integer orderCount) {
+		this.orderCount = orderCount;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public Integer getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
+	}
+
+	@Override
+	public String toString() {
+		return "OrderVO [id=" + id + ", orderCount=" + orderCount + ", productId=" + productId + ", memberId="
+				+ memberId + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, memberId, orderCount, productId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OrderVO other = (OrderVO) obj;
+		return Objects.equals(id, other.id) && Objects.equals(memberId, other.memberId)
+				&& Objects.equals(orderCount, other.orderCount) && Objects.equals(productId, other.productId);
+	}
+
+	
+}
