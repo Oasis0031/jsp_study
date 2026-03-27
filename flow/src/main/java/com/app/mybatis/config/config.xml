@@ -7,7 +7,10 @@
     </settings>
 
 	  <typeAliases>
-        <typeAlias type="com.app.vo.MemberVO" alias="memberVO"/>
+        <typeAlias type="com.app.vo.MemberVO" alias="MemberVO"/>
+        <typeAlias type="com.app.vo.ProductVO" alias="ProductVO"/>
+     <!--    <typeAlias type="com.app.vo.OrderVO" alias="OrderVO"/> -->
+        
     </typeAliases> 
 
     <environments default="oracle">
@@ -24,6 +27,8 @@
 
     <mappers>
         <mapper resource="com/app/mybatis/mapper/memberMapper.xml"/>
+        <mapper resource="com/app/mybatis/mapper/productMapper.xml"/>
+      <!--   <mapper resource="com/app/mybatis/mapper/orderMapper.xml"/> -->
     </mappers>
 
 </configuration>
